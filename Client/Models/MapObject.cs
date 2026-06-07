@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Drawing;
@@ -307,6 +307,12 @@ namespace Client.Models
         
         public virtual void Process()
         {
+            for (int i = Effects.Count - 1; i >= 0; i--)
+            {
+                if (Effects[i].IsRemoved)
+                    Effects.RemoveAt(i);
+            }
+
             DamageInfo previous = null;
             for (int index = 0; index < DamageList.Count; index++)
             {
@@ -4202,6 +4208,8 @@ namespace Client.Models
         }
         public virtual void DrawName()
         {
+            if (!Visible) return;
+
             if (NameLabel != null)
             {
                 int x = DrawX + (48 - NameLabel.Size.Width)/2;
@@ -4235,12 +4243,12 @@ namespace Client.Models
         }
         public virtual void DrawDamage()
         {
-
             foreach (DamageInfo damageInfo in DamageList)
                 damageInfo.Draw(DrawX, DrawY);
         }
         public void DrawChat()
         {
+            if (!Visible) return;
             if (ChatLabel == null || ChatLabel.IsDisposed) return;
 
             if (CEnvir.Now > ChatTime) return;
