@@ -268,9 +268,11 @@ namespace Client.Scenes
         #region Methods
         private bool CheckDbVersion()
         {
-#if DEBUG
-            CEnvir.DbVersionChecked = true;
-#endif
+            if (!Config.CheckSystemDb)
+            {
+                CEnvir.DbVersionChecked = true;
+                return true;
+            }
             if (CEnvir.DbVersionChecked) return true;
 
             if (CEnvir.DbVersionChecking) return false;

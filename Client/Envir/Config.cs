@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -16,6 +16,7 @@ namespace Client.Envir
         [ConfigSection("Network")]
         public static string IPAddress { get; set; } = "mir3.ibaboo.xyz";
         public static int Port { get; set; } = 17777;
+        public static bool CheckSystemDb { get; set; } = false;
         public static bool Ipv4 { get; set; } = true;
         public static TimeSpan TimeOutDuration { get; set; } = TimeSpan.FromSeconds(15);
 
